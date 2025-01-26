@@ -1,3 +1,4 @@
+import { addToCart } from "./cart.js";
 import { fetchProducts, renderProducts } from "./product.js";
 
 const menuIcon = document.querySelector("#menu-icon");
@@ -13,8 +14,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   } else {
     // Eger anasayfadaysak api'a istek at ve verileri al
     const products = await fetchProducts();
-    console.log(products);
+
     // Apiden gelen verileri render et
-    renderProducts(products);
+    renderProducts(products, (e) => {
+      addToCart(e, products);
+    });
   }
 });
